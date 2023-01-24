@@ -1,37 +1,43 @@
 import PropTypes from 'prop-types';
+import { Card,Image, DescriptionText,Menu,MenuItem} from 'components/Profile/Profile.styled'
 
 export const Profile = ({ name,
   tag,
   location,
   imageUrl,
   stats,
-  followers,
-  views,
-  likes,}) => {
+}) => {
+   const userStats = [{
+      title: 'Followers',
+      quantity: stats.followers
+   },
+   {
+      title: 'Views',
+      quantity: stats.views
+      },
+   {
+      title: 'Likes',
+      quantity: stats.likes
+   }]
   return (
-    <div class="profile">
-      <div class="description">
-        <img src={imageUrl} alt="User avatar" class="avatar" />
-        <p class="name">{name}</p>
-        <p class="tag">@{tag}</p>
-        <p class="location">{location}</p>
+    <Card>
+      <div className="description">
+        <Image src={imageUrl} alt="User avatar" className="avatar" />
+        <DescriptionText className="name">{name}</DescriptionText>
+        <DescriptionText className="tag">@{tag}</DescriptionText>
+        <DescriptionText className="location">{location}</DescriptionText>
       </div>
 
-      <ul class="stats">
-        <li>
-          <span class="label">Followers</span>
-          <span class="quantity">{followers}</span>
-        </li>
-        <li>
-          <span class="label">Views</span>
-          <span class="quantity">{views}</span>
-        </li>
-        <li>
-          <span class="label">Likes</span>
-          <span class="quantity">{likes}</span>
-        </li>
-      </ul>
-    </div>
+        <Menu>
+           {userStats.map(({title, quantity})=>
+              
+           <MenuItem key={title}>
+              <span className="label">{ title}</span>
+          <span className="quantity">{quantity}</span>
+        </MenuItem>)}
+         
+      </Menu>
+    </Card>
   );
 }
 
@@ -40,7 +46,7 @@ Profile.propTypes = {
   name: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
-  followers: PropTypes.number.isRequired,
-  views: PropTypes.number.isRequired,
-  likes: PropTypes.number.isRequired,
+//   followers: PropTypes.number.isRequired,
+//   views: PropTypes.number.isRequired,
+//   likes: PropTypes.number.isRequired,
 };
