@@ -1,26 +1,27 @@
 import PropTypes from 'prop-types';
+import {StatisticsWrapper, StatsMenu, StatsItem} from 'components/Statistics/Statistics.styled'
 
 export const Statistics = ({ title, stats }) => {
   return (
-    <section className="statistics">
+    <StatisticsWrapper>
         {title && (<h2 className="title">{ title}</h2>)}
 
-      <ul className="stat-list">
+      <StatsMenu>
         {stats.map(({ id, label, percentage }) => (
-          <li className="item" key={id}>
+          <StatsItem label={label.slice(1)} key={id}>
               <span className="label">{label }</span>
               <span className="percentage">{percentage }%</span>
-          </li>
+          </StatsItem>
         ))}
  
-      </ul>
-    </section>
+      </StatsMenu>
+    </StatisticsWrapper>
   );
 };
 
 Statistics.propTypes = {
   title: PropTypes.string,
-  id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  percentage: PropTypes.number.isRequired,
+  id: PropTypes.string,
+  label: PropTypes.string,
+  percentage: PropTypes.number,
 };
